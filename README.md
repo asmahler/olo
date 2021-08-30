@@ -1,5 +1,20 @@
-# :wave: Welcome to the API Test Project by Alex Mahler:wave: 
+# :wave: Welcome To The SuperTest Implementation:wave:
 
-You'll notice there are two branches here, one is called **feature/postman** and the is **feature/supertest**. I decided to do the implementation with both Postman and one with Supertest. In each branch, you will find the instructions on how to setup and run each projects. 
+## Geting Started
 
-Thanks again for taking the time to look at the project. 
+Clone the project
+
+  
+Install the packages (Make Sure to be in the root of the directory), run this:
+
+    npm i
+
+To Run the tests, here are a few commands
+ 
+
+    npm run singleTests -- generates HTML report
+    npm run dataDrivenTests -- generates HTML report
+    npm run cli_tests -- results are shown in command line
+    npm run cli_data_tests -- results are shown in command line
+
+To view the results, depending on which test you run, you should have the output HTML file in the root of the directory. 

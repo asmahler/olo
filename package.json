@@ -1,0 +1,28 @@
+{
+  "name": "olo",
+  "version": "1.0.0",
+  "description": "testing an API with supertest",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1",
+    "mocha-simple-html-reporter": "^2.0.0",
+    "supertest": "^6.1.6"
+  },
+  "scripts": {
+    "singleTests": "npx mocha tests/apiTest.js --reporter mocha-simple-html-reporter --reporter-options output=report.html",
+    "dataDrivenTests": "npx mocha tests/dataDrivenTests.js --reporter mocha-simple-html-reporter --reporter-options output=dataDriverreport.html",
+    "cli_tests": "npx mocha tests/apiTest.js",
+    "cli_data_tests": "npx mocha tests/dataDrivenTests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asmahler/olo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asmahler/olo/issues"
+  },
+  "homepage": "https://github.com/asmahler/olo#readme"
+}
