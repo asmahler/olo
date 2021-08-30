@@ -1,0 +1,23 @@
+{
+  "name": "olo",
+  "version": "1.0.0",
+  "description": "testing an API with Postman ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx newman run JSON_Placeholder_API.postman_collection.json -e Test.postman_environment.json -r html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asmahler/olo.git"
+  },
+  "author": "Alex Mahler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asmahler/olo/issues"
+  },
+  "homepage": "https://github.com/asmahler/olo#readme",
+  "devDependencies": {
+    "newman": "^5.2.4",
+    "newman-reporter-html": "^1.0.5"
+  }
+}

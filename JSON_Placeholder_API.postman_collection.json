@@ -1,0 +1,1683 @@
+{
+	"info": {
+		"_postman_id": "d81ef05f-93f5-4fd8-893c-072cb2569392",
+		"name": "JSON_Placeholder_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Posts",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "All Posts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 404;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Response Object\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    \r",
+											"    pm.expect(jsonData).to.be.empty;\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "All Posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify Status Code, Doc Size, and Reponse Time\", function () {\r",
+									"    const expectedResponseCode = 200;\r",
+									"    const expectedResponseTime = 100;\r",
+									"    const expectedResponseSize = 27520;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(expectedResponseTime);\r",
+									"    pm.expect(pm.response.responseSize).to.eql(expectedResponseSize)\r",
+									"    pm.expect(pm.response.id).to.not.be.empty;\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const totalPosts = jsonData.length;\r",
+									"    const expectedTotalPosts = 100;\r",
+									"    \r",
+									"    pm.expect(totalPosts).to.eql(expectedTotalPosts);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"{{postRoute}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Comment with Query String",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Request on get comments",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{commentsRoute}}"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comments when query string is a boolean",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=true",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{commentsRoute}}"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comments when query string as as string",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=\"qa\"",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{commentsRoute}}"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "\"qa\""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comments when query string is doing script injection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=`<script>console.log('qa')</script>`",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{commentsRoute}}"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "`<script>console.log('qa')</script>`"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Comments when query string is empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=\"\"",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{commentsRoute}}"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "\"\""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comments when with query string parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify Status Code, Doc Size, and Reponse Time\", function () {\r",
+									"    const expectedResponseCode = 200;\r",
+									"    const expectedResponseTime = 1000;\r",
+									"    const expectedResponseSize = 1510;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(expectedResponseTime);\r",
+									"    pm.expect(pm.response.responseSize).to.eql(expectedResponseSize)\r",
+									"    pm.expect(pm.response.id).to.not.be.empty;\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const totalPosts = jsonData.length;\r",
+									"    const expectedTotalPosts = 5\r",
+									"    \r",
+									"    pm.expect(totalPosts).to.eql(expectedTotalPosts);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/{{commentsRoute}}?postId=1",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"{{commentsRoute}}"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create A New Post",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Create New Post with an Empty Body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create New Post with Non JSON Body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    const expectedResponseCode = 500;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\"QA TEST\"",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create New Post Script Injection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"`<script>console.log('test')</script>`\",\r\n    \"body\": \"`<script>console.log('test')</script>\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create New Post with Id as a boolean",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This is a test post\",\r\n    \"userId\": true,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create New Post new JSON fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Codet\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"newField1\": \"newField1\",\r\n   \"newField2\": \"newField2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create New Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"/Verify Status Code, Document Size, and Response Time\", function () {\r",
+									"    const expectedResponseCode = 201;\r",
+									"    const expectedResponseTime = 1000;\r",
+									"    const expectedResponseSize = 90;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(expectedResponseTime);\r",
+									"    pm.expect(pm.response.responseSize).to.eql(expectedResponseSize)\r",
+									"    pm.expect(pm.response.id).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedBody = {\r",
+									"    \"title\": \"QA Test Post\",\r",
+									"    \"body\": \"This is a test post\",\r",
+									"    \"userId\": 1, \r",
+									"    \"id\": 101\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(jsonData).to.eql(expectedBody);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This is a test post\",\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/{{postRoute}}",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"{{postRoute}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update An Existing Post By Id",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Request on Update Route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request on Update Route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Codet\", function () {\r",
+											"    var expectedResponseCode = 404;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update an Id that is not a number in route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 500;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/one",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"one"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update an Id that doesn't exist in route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 500;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/10000000",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"10000000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post Id as script Injection in route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 404;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}<script>console.log('test')</script>",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}<script>console.log('test')<",
+										"script>"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post without a body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post when request id is not a number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\": \"QA Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post when request userId is not a number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": \"QA TEST\",\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post when request body is not a string",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": true,\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post with script injection in request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This is a test post\",\r\n    \"userId\": \"<script>console.log('test')</script>\",\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update post when route Id does not match request id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"    \r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 2,\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This is a test post\",\r\n    \"userId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update an existing post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify Status Code, Document Size, and Response Time\", function () {\r",
+									"    const expectedResponseCode = 200;\r",
+									"    const expectedResponseTime = 1000;\r",
+									"    const expectedResponseSize = 88;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(expectedResponseTime);\r",
+									"    pm.expect(pm.response.responseSize).to.eql(expectedResponseSize)\r",
+									"    pm.expect(pm.response.id).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedBody = {\r",
+									"    \"id\": 1,\r",
+									"    \"title\": \"QA Test Post\",\r",
+									"    \"body\": \"This is a test post\",\r",
+									"    \"userId\": 1\r",
+									"};\r",
+									"    \r",
+									"    console.log(jsonData)\r",
+									"\r",
+									"\r",
+									"    pm.expect(jsonData).to.eql(expectedBody);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This is a test post\",\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"{{postRoute}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update An A Post Comment By Id",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Request on Update Comment Route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1/{{commentsRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1",
+										"{{commentsRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing comment with Empty Body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1/{{commentsRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1",
+										"{{commentsRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing comment with Script Injection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"`<script>console.log('test')</script>`\",\r\n    \"body\": \"`<script>console.log('test')</script>\",\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1/{{commentsRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1",
+										"{{commentsRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing comment with Id as a boolean",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": true,\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1/{{commentsRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1",
+										"{{commentsRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update existing comment with body not a string",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": 123,\r\n    \"userId\": 1,\r\n    \"id\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1/{{commentsRoute}}",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1",
+										"{{commentsRoute}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update exitsing comment new JSON fields",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Codet\", function () {\r",
+											"    var expectedResponseCode = 201;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"newField1\": \"newField1\",\r\n   \"newField2\": \"newField2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/posts",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update an existing comment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"/Verify Status Code, Document Size, and Response Time\", function () {\r",
+									"    const expectedResponseCode = 201;\r",
+									"    const expectedResponseTime = 1000;\r",
+									"    const expectedResponseSize = 94;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"    pm.expect(pm.response.responseTime).to.be.lessThan(expectedResponseTime);\r",
+									"    pm.expect(pm.response.responseSize).to.eql(expectedResponseSize)\r",
+									"    pm.expect(pm.response.id).to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedBody = {\r",
+									"    \"title\": \"QA Test Post\",\r",
+									"    \"body\": \"This an updated comment\",\r",
+									"    \"userId\": 1,\r",
+									"    \"id\":101\r",
+									"}\r",
+									"\r",
+									"    pm.expect(jsonData).to.eql(expectedBody);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"QA Test Post\",\r\n    \"body\": \"This an updated comment\",\r\n    \"userId\": 1,\r\n    \"id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/posts",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete A Post By Id",
+			"item": [
+				{
+					"name": "Validation",
+					"item": [
+						{
+							"name": "Request on Delete Route",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete on ad id that is not a number",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete on an id that does not exist",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 200;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete on an id as script injection",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Status Code\", function () {\r",
+											"    var expectedResponseCode = 404;\r",
+											"\r",
+											"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{jsonPlaceHolder}}/{{postRoute}}/<script>console.log('test')</script>",
+									"host": [
+										"{{jsonPlaceHolder}}"
+									],
+									"path": [
+										"{{postRoute}}",
+										"<script>console.log('test')<",
+										"script>"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete an item based on Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify Status Code\", function () {\r",
+									"    var expectedResponseCode = 200;\r",
+									"\r",
+									"    pm.expect(pm.response.code).to.eql(expectedResponseCode);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Response Object\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedBody = {};\r",
+									"\r",
+									"    pm.expect(jsonData).to.eql(expectedBody);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{jsonPlaceHolder}}/{{postRoute}}/1",
+							"host": [
+								"{{jsonPlaceHolder}}"
+							],
+							"path": [
+								"{{postRoute}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
